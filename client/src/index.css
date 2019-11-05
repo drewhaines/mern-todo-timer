@@ -33,7 +33,7 @@ a:hover {
 }
 
 @media only screen and (min-width: 960px) .flow-text {
-    font-size: 1.5em;
+  font-size: 1.5em;
 }
 
 .left-brand {
@@ -43,11 +43,22 @@ a:hover {
 .user-actions {
   float: right;
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   color: black;
   align-items: center;
   margin-right: 15px;
   grid-gap: 25px
+}
+
+@media only screen and (max-width: 650px) {
+  .nav-wrapper {
+    height: 120px !important;
+  }
+
+  .user-actions {
+    position: relative;
+    top: 60px;
+  }
 }
 
 .user-actions p {
@@ -65,4 +76,10 @@ a:hover {
 
 input + div hr {
   bottom: 2px !important;
+}
+
+nav .brand-logo {
+  display: grid !important;
+  grid-template-columns: auto 1fr;
+  white-space: nowrap;
 }

@@ -14,12 +14,12 @@ class Navbar extends Component {
     const { user } = this.props.auth;
 
     return (
-      <div className="navbar-fixed materialize">
+      <div className="navbar materialize">
         <nav className="z-depth-0">
           <div className="nav-wrapper white">
             <Link
               to="/"
-              className={`col s5 brand-logo black-text ${user.name ? 'left-brand' : 'center'}`}
+              className={`col brand-logo black-text ${user.name ? 'left-brand' : 'center'}`}
             >
               <i className="material-icons">alarm_on</i>
               The Todo Timer
