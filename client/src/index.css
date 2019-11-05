@@ -79,3 +79,7 @@ nav .brand-logo {
   grid-template-columns: auto 1fr;
   white-space: nowrap;
 }
+
+.navbar.materialize {
+  height: 70px;
+}

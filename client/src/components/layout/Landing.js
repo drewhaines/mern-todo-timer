@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Background from "../../images/background.jpg"
 
 const backgroundStyle = {
-  height: "calc( 100vh - 64px)",
+  height: "calc( 100vh - 70px)",
   backgroundImage: `url(${Background})`,
   backgroundPosition: 'center',
   backgroundSize: 'cover',
