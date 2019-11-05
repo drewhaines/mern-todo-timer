@@ -51,10 +51,6 @@ a:hover {
 }
 
 @media only screen and (max-width: 650px) {
-  .nav-wrapper {
-    height: 120px !important;
-  }
-
   .user-actions {
     position: relative;
     top: 60px;
