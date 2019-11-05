@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
+import { connect } from "react-redux";
+import { sortBy } from "lodash";
+import { getTodos, createTodo, updateTodo, deleteTodo } from "../../actions/todoActions";
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
 import TextField from './TextField';
@@ -60,48 +63,45 @@ const styles = {
 }
 
 class TodoList extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      todos: [],
-      newTodo: {name: '', completed: false}
-    };
+  state = { newTodo: '' }
+
+  componentWillMount() {
+    const { id: userId } = this.props.user;
+    this.props.getTodos(userId)
   }
 
-  addTodo() {
-    let todos = this.state.todos;
+  addTodo = () => {
+    const { newTodo } = this.state;
 
-    if(this.state.newTodo && this.state.newTodo.name) {
-      todos.push(this.state.newTodo)
-      this.setState({todos: todos, newTodo: {name: '', completed: false}});
+    if (newTodo) {
+      const todo = {
+        name: newTodo,
+        userId: this.props.user.id
+      }
+      this.props.createTodo(todo);
+      this.setState({newTodo: ''});
     }
   }
 
-  removeTodo(index) {
-    let todos = this.state.todos;
-    todos.splice(index, 1);
-    this.setState({todos: todos})
-  }
+  removeTodo = (todo) => this.props.deleteTodo(todo)
 
-  handleInput(event, value){
-    this.setState({newTodo: {name: value}})
-  }
+  handleInput = (event, value) => this.setState({newTodo: value})
 
-  handleCheck(index, event, value){
-    let todos = this.state.todos;
-    todos[index]['completed'] = value;
-    this.setState({todos: todos})
+  handleCheck = (todo) => {
+    todo.completed = !todo.completed;
+    this.props.updateTodo(todo);
   }
 
   renderTodos(todos) {
+    const { handleCheck, removeTodo } = this
     return(
-      todos.map((todo, index) => (
-        <div>
+      sortBy((todos || []), t => t.completed).map((todo, index) => (
+        <div key={todo._id}>
           <p key={todo.name} style={styles.todo}>
             <span style={styles.inline}>
               <Checkbox
                 checked={todo.completed}
-                onCheck={this.handleCheck.bind(this, index)}
+                onCheck={() => handleCheck(todo)}
                 style={styles.checkbox}
                 iconStyle={{fill: '#1e88e5'}}
               />
@@ -110,11 +110,10 @@ class TodoList extends Component {
               {todo.name}
             </span>
             {
-              !todo.completed &&
               <span
                 className='float-right'
                 style={styles.inline}
-                onClick={this.removeTodo.bind(this, index)}
+                onClick={() => removeTodo(todo)}
               >
                 <Delete style={styles.delete} color='grey' />
               </span>
@@ -127,6 +126,9 @@ class TodoList extends Component {
   }
 
   render() {
+    const { addTodo, handleInput } = this;
+    const todos = this.props.todos || [];
+
     return (
       <div style={{marginBottom: 100}}>
         <br/>
@@ -135,7 +137,7 @@ class TodoList extends Component {
             <Paper zDepth={1}>
               <div style={styles.todoList}>
                 {
-                  this.state.todos.length === 0 &&
+                  todos.length === 0 &&
                   <div className='center'>
                     <p style={styles.missingText}>
                       You need to add some todos to your list!
@@ -148,8 +150,8 @@ class TodoList extends Component {
                   </div>
                 }
                 {
-                 this.state.todos.length > 0 &&
-                 this.renderTodos(this.state.todos)
+                 todos.length > 0 &&
+                 this.renderTodos(todos)
                 }
               </div>
               <br/>
@@ -161,13 +163,13 @@ class TodoList extends Component {
                   fullWidth={true}
                   floatingLabelText="Add New Todo"
                   floatingLabelStyle={{fontSize: 20}}
-                  value={this.state.newTodo.name}
-                  onChange={this.handleInput.bind(this)}
-                  onEnter={this.addTodo.bind(this)}
+                  value={this.state.newTodo}
+                  onChange={handleInput}
+                  onEnter={addTodo}
                 />
               </Col>
               <Col xs={3} sm={2}>
-                <FloatingActionButton onClick={this.addTodo.bind(this)} backgroundColor="#1e88e5">
+                <FloatingActionButton onClick={addTodo} backgroundColor="#1e88e5">
                   <ContentAdd />
                 </FloatingActionButton>
               </Col>
@@ -179,4 +181,13 @@ class TodoList extends Component {
   }
 }
 
-export default TodoList;
+
+const mapStateToProps = state => ({
+  todos: state.todo.todos,
+  user: state.auth.user
+});
+
+export default connect(
+  mapStateToProps,
+  { getTodos, createTodo, updateTodo, deleteTodo }
+)(TodoList);

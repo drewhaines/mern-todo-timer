@@ -62,3 +62,7 @@ a:hover {
 .todo-timer input {
   box-shadow: none !important;
 }
+
+input + div hr {
+  bottom: 2px !important;
+}
