@@ -8,36 +8,11 @@ import TextField from './TextField';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Delete from 'material-ui-icons/Delete';
+import styles from "../../styles";
 
-const styles = {
-  icon: {
-    width: 25,
-    height: 25,
-    position: 'relative',
-    cursor: 'pointer'
-  },
-  dialogHeight: {
-    marginTop: 25,
-    minHeight: 200
-  },
-  textField: {
-    marginRight: 10,
-    fontSize: 20
-  },
-  inline: {
-    display: 'inline-block'
-  },
-  delete: {
-    width: 35,
-    height: 35,
-    position: 'relative',
-    top: 30,
-    left: 10,
-    cursor: 'pointer'
-  }
-}
-
-class TodoTimer extends Component {
+class CyclesDialog extends Component {
+  // TODO currently unused
+  // Needs to be added to Navbar or TodoTimer and tied into redux and API
   constructor(props) {
     super();
 
@@ -119,7 +94,7 @@ class TodoTimer extends Component {
                 style={styles.inline}
                 onClick={this.removeCycle.bind(this, index)}
               >
-                <Delete style={styles.delete} color='grey' />
+                <Delete style={styles.deleteCycle} color='grey' />
               </span>
             }
           </Col>
@@ -191,4 +166,4 @@ class TodoTimer extends Component {
   }
 }
 
-export default TodoTimer;
+export default CyclesDialog;

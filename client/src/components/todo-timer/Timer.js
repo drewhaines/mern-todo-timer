@@ -7,14 +7,7 @@ import Refresh from 'material-ui-icons/Refresh';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Sound from 'react-sound';
 import ding from '../../sounds/DING.mp3'
-
-
-const styles = {
-  timer: {
-    fontSize: 30,
-    marginTop: 100,
-  }
-}
+import styles from "../../styles";
 
 class Timer extends Component {
   constructor(props) {

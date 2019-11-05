@@ -5,62 +5,13 @@ import { sortBy } from "lodash";
 import { getTodos, createTodo, updateTodo, deleteTodo } from "../../actions/todoActions";
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
-import TextField from './TextField';
+import TextField from '../common/TextField';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Checkbox from 'material-ui/Checkbox';
 import Owl from '../../images/owl_books.png';
 import Delete from 'material-ui-icons/Delete';
-
-const styles = {
-  todoList: {
-    height: 350,
-    textAlign: "left",
-    overflowY: "auto",
-    overflowX: "hidden",
-  },
-  textField: {
-    marginRight: 10,
-    fontSize: 20
-  },
-  missingText: {
-    marginTop: 50,
-    color: 'grey',
-    padding: '0px 30px',
-    fontSize: 16
-  },
-  todo: {
-    padding: '15px 15px',
-    margin: 0,
-  },
-  checkbox: {
-    display: 'inline-block',
-    position: 'relative',
-    top: 5
-  },
-  todoText: {
-    display: 'inline-block',
-    position: 'relative',
-    fontSize: 18
-  },
-  todoCompleted: {
-    display: 'inline-block',
-    position: 'relative',
-    fontSize: 18,
-    color: 'grey',
-    textDecoration: 'line-through'
-  },
-  inline: {
-    display: 'inline-block'
-  },
-  delete: {
-    width: 25,
-    height: 25,
-    position: 'relative',
-    top: 4,
-    cursor: 'pointer'
-  }
-}
+import styles from "../../styles";
 
 class TodoList extends Component {
   state = { newTodo: '' }
@@ -140,10 +91,11 @@ class TodoList extends Component {
                   todos.length === 0 &&
                   <div className='center'>
                     <p style={styles.missingText}>
-                      You need to add some todos to your list!
+                      You need to add some todos!
                     </p>
+                    <br/>
                     <Row>
-                      <Col xs={{ size: 4, offset: 4 }}>
+                      <Col xs={{ size: 12 }}>
                         <img src={Owl} alt={"owl"} style={{maxWidth: 200}} className='responsive-img' />
                       </Col>
                     </Row>
@@ -180,7 +132,6 @@ class TodoList extends Component {
     );
   }
 }
-
 
 const mapStateToProps = state => ({
   todos: state.todo.todos,
