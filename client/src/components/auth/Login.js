@@ -16,15 +16,14 @@ class Login extends Component {
   }
 
   componentDidMount() {
-    // If logged in and user navigates to Login page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/timer");
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard"); // push user to dashboard when they login
+      this.props.history.push("/timer");
     }
 
     if (nextProps.errors) {
@@ -51,7 +50,7 @@ class Login extends Component {
 render() {
     const { errors } = this.state;
     return (
-      <div className="container">
+      <div className="container materialize">
         <div style={{ marginTop: "4rem" }} className="row">
           <div className="col s8 offset-s2">
             <Link to="/" className="btn-flat waves-effect">

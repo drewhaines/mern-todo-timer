@@ -21,7 +21,7 @@ class Register extends Component {
   componentDidMount() {
     // If logged in and user navigates to Register page, should redirect them to dashboard
     if (this.props.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/timer");
     }
   }
 
@@ -52,7 +52,7 @@ class Register extends Component {
 render() {
     const { errors } = this.state;
     return (
-      <div className="container">
+      <div className="container materialize">
         <div className="row">
           <div className="col s8 offset-s2">
             <Link to="/" className="btn-flat waves-effect">
@@ -94,7 +94,7 @@ render() {
                   })}
                 />
                 <label htmlFor="email">Email</label>
-                <span className="red-text">{errors.password}</span>
+                <span className="red-text">{errors.email}</span>
               </div>
               <div className="input-field col s12">
                 <input

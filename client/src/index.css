@@ -1,8 +1,7 @@
-body {
-  margin: 0;
+body, p, h1, h2, h3, h4, h5, input, label {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+    sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -10,4 +9,56 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+.materialize .row {
+  display: unset;
+  margin-left: unset;
+  margin-right: unset;
+  width: 100%;
+}
+
+.materialize .col {
+  width: unset;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.btn:hover,
+.btn:active,
+.btn:focus {
+  color: white;
+}
+
+@media only screen and (min-width: 960px) .flow-text {
+    font-size: 1.5em;
+}
+
+.left-brand {
+  left: 15px;
+}
+
+.user-actions {
+  float: right;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  color: black;
+  align-items: center;
+  margin-right: 15px;
+  grid-gap: 25px
+}
+
+.user-actions p {
+  margin-bottom: 0px;
+  font-size: 20px;
+}
+
+.user-actions .btn {
+  height: 40px;
+}
+
+.todo-timer input {
+  box-shadow: none !important;
 }
